@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Embeddable
 @Getter
-public class Salary implements ValueObject {
+public class Salary implements ValueObject {        // fixme: mozebi treba @JsonCreator i @JsonProperty za deserijalizacija
 
     @Enumerated(value = EnumType.STRING)
     private final Currency currency;
@@ -28,6 +28,7 @@ public class Salary implements ValueObject {
         this.bonus = bonus;
     }
 
+    // factory method
     public Salary valueOf(Currency currency, double amount, double bonus){
         return new Salary(currency,amount,bonus);
     }
@@ -60,6 +61,24 @@ public class Salary implements ValueObject {
         if (this.bonus-dec<0)
             throw new IllegalArgumentException("Cannot have salary bonus <0");
         return new Salary(this.currency, this.amount, this.bonus-dec);
+    }
+
+    // Todo: Mozebi ne e tocna
+    public Salary getInEuros(){
+        if(this.currency == Currency.EUR)
+            return new Salary(this.currency, this.amount, this.bonus);
+        else{
+            return new Salary(Currency.EUR, this.amount/60, this.bonus/60);
+        }
+    }
+
+    // Todo: Mozebi ne e tocna
+    public Salary getInDenars(){
+        if(this.currency == Currency.MKD)
+            return new Salary(this.currency, this.amount, this.bonus);
+        else{
+            return new Salary(Currency.MKD, this.amount*60, this.bonus*60);
+        }
     }
 
     @Override
