@@ -7,9 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="employee-sector" />
-        <module name="user-request" />
+        <module name="EMT-MiniProekt---HR_Enhancer" />
         <module name="shared-kernel" />
         <module name="hr_enhancer" />
+        <module name="user-request" />
       </profile>
     </annotationProcessing>
   </component>
