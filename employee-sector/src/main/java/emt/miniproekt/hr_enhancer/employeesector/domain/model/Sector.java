@@ -1,7 +1,6 @@
-package emt.miniproekt.hr_enhancer.employeesector.model;
+package emt.miniproekt.hr_enhancer.employeesector.domain.model;
 
 
-import lombok.Generated;
 import lombok.Getter;
 
 import javax.persistence.*;

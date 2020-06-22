@@ -1,4 +1,4 @@
-package emt.miniproekt.hr_enhancer.employeesector.model;
+package emt.miniproekt.hr_enhancer.employeesector.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import emt.miniproekt.sharedkernel.domain.base.Position;
