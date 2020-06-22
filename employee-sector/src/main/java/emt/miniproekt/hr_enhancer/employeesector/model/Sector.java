@@ -25,7 +25,8 @@ public class Sector{
     @OneToMany(mappedBy = "sectorId", fetch = FetchType.EAGER)
     private List<Employee> employees;
 
-    public Sector(){}
+    @SuppressWarnings("unused")
+    private Sector(){}
 
     public Sector(String name){
         this.name = name;

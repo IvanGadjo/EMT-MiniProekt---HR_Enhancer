@@ -42,8 +42,8 @@ public class Employee {
     // value object
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "start", column = @Column(name = "start")),
-            @AttributeOverride(name = "end", column = @Column(name = "end"))
+            @AttributeOverride(name = "start", column = @Column(name = "contract_start")),
+            @AttributeOverride(name = "end", column = @Column(name = "contract_end"))
     })
     private Contract contract;
 
@@ -64,8 +64,8 @@ public class Employee {
 //    private int restDaysReqId;
 
 
-
-    public Employee(){}
+    @SuppressWarnings("unused")
+    private Employee(){}
 
     public Employee(NameInfo nameInfo, Salary salary, Contract contract, String embg, Position position, Sector sectorId){
         this.nameInfo = nameInfo;
