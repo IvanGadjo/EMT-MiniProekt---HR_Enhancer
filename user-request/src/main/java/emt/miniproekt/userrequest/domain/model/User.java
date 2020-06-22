@@ -27,6 +27,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
+
     @SuppressWarnings("unused")
     private User() {
 
