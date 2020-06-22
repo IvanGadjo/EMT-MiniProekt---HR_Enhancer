@@ -26,15 +26,19 @@ public class RaiseRequest {
     @Column(name = "newSalary")
     private double newSalary;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
     @SuppressWarnings("unused")
     private RaiseRequest() {
 
     }
 
-    public RaiseRequest(int employeeId, String description, double newSalary){
+    public RaiseRequest(int employeeId, String description, double newSalary, User user){
         this.employeeId = employeeId;
         this.description = description;
         this.newSalary = newSalary;
+        this.user = user;
     }
 
     public void setEmployeeId(int employeeId) {

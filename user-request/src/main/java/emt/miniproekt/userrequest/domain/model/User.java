@@ -1,12 +1,10 @@
 package emt.miniproekt.userrequest.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,6 +25,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<ComplaintRequest> complaintRequests;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<RaiseRequest> raiseRequests;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<PositionChangeRequest> positionChangeRequests;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<RestDaysRequest> restDaysRequests;
 
     @SuppressWarnings("unused")
     private User() {
@@ -36,6 +45,11 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        complaintRequests = new ArrayList<>();
+        raiseRequests = new ArrayList<>();
+        positionChangeRequests = new ArrayList<>();
+        restDaysRequests = new ArrayList<>();
+
     }
 
     public void setUsername(String username){

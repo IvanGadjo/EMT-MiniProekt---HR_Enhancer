@@ -26,15 +26,19 @@ public class PositionChangeRequest {
     @Column(name = "newPosition")
     private String newPosition;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
     @SuppressWarnings("unused")
     private PositionChangeRequest() {
 
     }
 
-    public PositionChangeRequest(int employeeId, String description, String newPosition) {
+    public PositionChangeRequest(int employeeId, String description, String newPosition, User user) {
         this.employeeId = employeeId;
         this.description = description;
         this.newPosition = newPosition;
+        this.user = user;
     }
 
     public void setEmployeeId(int employeeId) {

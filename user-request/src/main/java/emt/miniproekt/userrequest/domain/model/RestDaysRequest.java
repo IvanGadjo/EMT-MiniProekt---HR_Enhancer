@@ -26,15 +26,19 @@ public class RestDaysRequest {
     @Column(name = "numDays")
     private int numDays;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
     @SuppressWarnings("unused")
     private RestDaysRequest() {
 
     }
 
-    public RestDaysRequest(int employeeId, String description, int numDays) {
+    public RestDaysRequest(int employeeId, String description, int numDays, User user) {
         this.employeeId = employeeId;
         this.description = description;
         this.numDays = numDays;
+        this.user = user;
     }
 
     public void setEmployeeId(int employeeId) {

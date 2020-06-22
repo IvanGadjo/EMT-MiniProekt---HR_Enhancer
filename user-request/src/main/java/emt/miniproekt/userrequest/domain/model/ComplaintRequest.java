@@ -22,14 +22,19 @@ public class ComplaintRequest {
     @Column(name = "employeeId")
     private int employeeId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
     @SuppressWarnings("unused")
     private ComplaintRequest() {
 
     }
 
-    public ComplaintRequest(int employeeId, String description) {
+    public ComplaintRequest(int employeeId, String description, User user) {
         this.employeeId  = employeeId;
         this.description = description;
+        this.user = user;
+
     }
 
     public void setDescription(String description) {
