@@ -1,6 +1,8 @@
 package emt.miniproekt.userrequest.domain.model;
 
 import lombok.Getter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,15 +27,19 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<ComplaintRequest> complaintRequests;
 
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<RaiseRequest> raiseRequests;
 
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<PositionChangeRequest> positionChangeRequests;
 
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<RestDaysRequest> restDaysRequests;
 
