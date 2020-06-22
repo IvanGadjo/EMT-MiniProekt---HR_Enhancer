@@ -14,16 +14,22 @@ public class Contract implements ValueObject {      // fixme: mozebi treba @Json
 
     private final LocalDate end;
 
-    public Contract(LocalDate start, LocalDate end){
+    private final int restDays;
+
+
+    public Contract(LocalDate start, LocalDate end, int restDays){
         if(start.isAfter(end))
             throw new IllegalArgumentException("End of contract is before start");
+        if(restDays<0)
+            throw new IllegalArgumentException("Negative number of rest days");
         this.start = start;
         this.end = end;
+        this.restDays = restDays;
     }
 
     // factory method
-    public Contract valueOf(LocalDate start, LocalDate end){
-        return new Contract(start, end);
+    public Contract valueOf(LocalDate start, LocalDate end, int restDays){
+        return new Contract(start, end, restDays);
     }
 
     public boolean isLongerThenAYear(){
@@ -38,6 +44,7 @@ public class Contract implements ValueObject {      // fixme: mozebi treba @Json
         return false;
     }
 
+
     @Override
     public int hashCode() {
         return super.hashCode();
@@ -50,13 +57,16 @@ public class Contract implements ValueObject {      // fixme: mozebi treba @Json
         if(obj == null || getClass() != obj.getClass())
             return false;
         Contract other = (Contract) obj;
-        if (this.start.isEqual(other.start) && this.end.isEqual(other.end))
+        if (this.start.isEqual(other.start) && this.end.isEqual(other.end) && this.restDays == other.restDays)
             return true;
         return false;
     }
 
     @Override
     public String toString() {
-        return start.toString()+" - "+end.toString();
+        return start.toString()+" - "+end.toString()+", rest days: "+restDays;
     }
+
+
+
 }
