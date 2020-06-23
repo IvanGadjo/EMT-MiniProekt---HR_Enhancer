@@ -8,4 +8,6 @@ public interface DomainEvent {
 
     @NonNull
     Instant occuredOn();
+
+    String getDesription();
 }
