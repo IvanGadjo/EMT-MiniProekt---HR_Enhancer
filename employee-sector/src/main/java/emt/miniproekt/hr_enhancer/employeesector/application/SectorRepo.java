@@ -27,7 +27,7 @@ public class SectorRepo {
         return sectorRepoJPA.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public Sector saveNewEmployee(Sector sector){
+    public Sector saveNewSector(Sector sector){
         return sectorRepoJPA.save(sector);
     }
 

@@ -16,6 +16,12 @@ public class Contract implements ValueObject {      // fixme: mozebi treba @Json
 
     private final int restDays;
 
+    @SuppressWarnings("unused")
+    public Contract(){
+        start = null;
+        end = null;
+        restDays = 0;
+    }
 
     public Contract(LocalDate start, LocalDate end, int restDays){
         if(start.isAfter(end))

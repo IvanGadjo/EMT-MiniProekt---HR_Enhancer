@@ -20,6 +20,13 @@ public class Salary implements ValueObject {        // fixme: mozebi treba @Json
 
     private final double bonus;
 
+    @SuppressWarnings("unused")
+    public Salary(){
+        currency = null;
+        amount = 0;
+        bonus = 0;
+    }
+
     public Salary(Currency currency, double amount, double bonus){
         if(amount<0 || bonus<0)
             throw new IllegalArgumentException("Amount or bonus must be > 0");

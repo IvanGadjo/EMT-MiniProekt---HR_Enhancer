@@ -14,6 +14,12 @@ public class NameInfo implements ValueObject {
 
     private final String lastName;
 
+    @SuppressWarnings("unused")
+    public NameInfo(){
+        firstName = null;
+        lastName = null;
+    }
+
     public NameInfo(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
