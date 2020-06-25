@@ -7,7 +7,7 @@ import java.time.Instant;
 public interface DomainEvent {
 
     @NonNull
-    Instant occuredOn();
+    Instant occurredOn();
 
-    String getDesription();
+    String getDescription();
 }

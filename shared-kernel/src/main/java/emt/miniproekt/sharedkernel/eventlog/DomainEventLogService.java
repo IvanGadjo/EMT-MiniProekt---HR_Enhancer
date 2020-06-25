@@ -1,5 +1,6 @@
 package emt.miniproekt.sharedkernel.eventlog;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.List;
 public class DomainEventLogService {
 
     StoredDomainEventRepo storedDomainEventRepo;
+    ObjectMapper objectMapper;
 
-    public DomainEventLogService(StoredDomainEventRepo storedDomainEventRepo){
+    public DomainEventLogService(StoredDomainEventRepo storedDomainEventRepo, ObjectMapper objectMapper){
         this.storedDomainEventRepo = storedDomainEventRepo;
+        this.objectMapper = objectMapper;
     }
 
     public DomainEventLogService() {
@@ -23,7 +26,7 @@ public class DomainEventLogService {
 
     @Transactional(propagation = Propagation.MANDATORY)
     public void append(DomainEvent domainEvent){
-        StoredDomainEvent storedDomainEvent = new StoredDomainEvent(domainEvent);
+        StoredDomainEvent storedDomainEvent = new StoredDomainEvent(domainEvent, objectMapper);
         storedDomainEventRepo.saveAndFlush(storedDomainEvent);
     }
 
