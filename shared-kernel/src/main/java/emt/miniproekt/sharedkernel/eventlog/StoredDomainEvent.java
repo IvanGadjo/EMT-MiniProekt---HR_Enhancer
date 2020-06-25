@@ -2,14 +2,19 @@ package emt.miniproekt.sharedkernel.eventlog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
 import emt.miniproekt.sharedkernel.jackson.RawJsonDeserializer;
 import lombok.Getter;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -47,5 +52,43 @@ public class StoredDomainEvent {
     public StoredDomainEvent(DomainEvent domainEvent, ObjectMapper objectMapper){
         this.occurredOn = domainEvent.occurredOn();
         this.description = domainEvent.getDescription();
+        this.domainEventClassName = domainEvent.getClass().getName();
+        try {
+            domainEventBody = objectMapper.writeValueAsString(domainEvent);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("JSON serialization failed", e);
+        }
+
+        if (domainEventBody.length() > MAX_JSON_BODY_LENGTH){
+            throw new IllegalArgumentException("Too long event body to serialize as JSON");
+        }
     }
+
+
+
+    @NonNull
+    public String toJsonString() {
+        return domainEventBody;
+    }
+
+
+    @NonNull
+    public JsonNode toJsonNode(@NonNull ObjectMapper objectMapper) {
+        Objects.requireNonNull(objectMapper, "objectMapper must not be null");
+        try {
+            return objectMapper.readTree(domainEventBody);
+        } catch (IOException ex) {
+            throw new IllegalStateException("Could not deserialize domain event from JSON", ex);
+        }
+    }
+
+    // FIXME: Mozebi radi deserializerot ke treba da se implementira
+    // toDomainEvent()
+    // toJsonString()
+    // toJsonNode()
+    // domainEventClass()
+    // domainEventClassName()
+    // lookupDomainEventClass()
+    // occurredOn()
+    // toString()
 }
