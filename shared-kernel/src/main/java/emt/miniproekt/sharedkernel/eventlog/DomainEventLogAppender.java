@@ -12,6 +12,10 @@ public class DomainEventLogAppender {
         this.domainEventLogService = domainEventLogService;
     }
 
+    public DomainEventLogAppender() {
+
+    }
+
     // slusa za event, go predava na domainEventLogService
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onDomainEvent(DomainEvent domainEvent){
