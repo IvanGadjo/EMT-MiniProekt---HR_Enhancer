@@ -17,6 +17,9 @@ public class DomainEventLogService {
         this.storedDomainEventRepo = storedDomainEventRepo;
     }
 
+    public DomainEventLogService() {
+
+    }
 
     @Transactional(propagation = Propagation.MANDATORY)
     public void append(DomainEvent domainEvent){

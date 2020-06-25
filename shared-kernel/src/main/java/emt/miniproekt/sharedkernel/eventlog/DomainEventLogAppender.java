@@ -1,8 +1,11 @@
 package emt.miniproekt.sharedkernel.eventlog;
 
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
+
+@Service
 
 public class DomainEventLogAppender {
 
