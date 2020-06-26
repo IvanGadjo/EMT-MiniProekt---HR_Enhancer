@@ -1,5 +1,7 @@
 package emt.miniproekt.userrequest.rest;
 
+import emt.miniproekt.userrequest.domain.model.ComplaintRequest;
+import emt.miniproekt.userrequest.domain.model.User;
 import emt.miniproekt.userrequest.domain.service.UsersService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,17 @@ public class UserRequestsAPI {
     }
 
     @PostMapping("/complaintRequest")
-    public void makeNewComplaintReq(@RequestParam("employeeId") int employeeId,
-                                    @RequestParam("description") String description,
-                                    @RequestParam("userId") int userId){
-        // find user
-        // userService.makeComplaintRequest()
+    public ComplaintRequest makeNewComplaintReq(@RequestParam("employeeId") int employeeId,
+                                                @RequestParam("description") String description,
+                                                @RequestParam("userId") int userId){
+        return usersService.makeComplaintRequest(employeeId, description, userId);
     }
+
+    @PostMapping("/makeNewUser")
+    public User addUser(@RequestParam("username") String username,
+                        @RequestParam("password") String password){
+        return usersService.makeNewUser(username, password);
+    }
+
+
 }

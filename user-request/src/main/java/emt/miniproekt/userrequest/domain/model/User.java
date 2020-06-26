@@ -66,4 +66,8 @@ public class User {
         this.password = password;
     }
 
+    public void addComplaintRequest(ComplaintRequest cr7){
+        complaintRequests.add(cr7);
+    }
+
 }

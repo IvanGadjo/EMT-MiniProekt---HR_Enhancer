@@ -28,6 +28,7 @@ public class StoredDomainEvent {
     private int id;
 
     @JsonProperty("occurredOn")
+    @Column(name = "occurredOn")
     private Instant occurredOn;
 
 
