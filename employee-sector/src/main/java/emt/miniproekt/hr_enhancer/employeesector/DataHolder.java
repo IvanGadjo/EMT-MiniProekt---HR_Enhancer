@@ -22,7 +22,7 @@ public class DataHolder {
     public DataHolder(EmployeeRepo employeeRepo, SectorRepo sectorRepo){
         this.employeeRepo = employeeRepo;
         this.sectorRepo = sectorRepo;
-        // addData();
+         //addData();
     }
 
 
@@ -39,5 +39,17 @@ public class DataHolder {
                 sector1);
 
         employeeRepo.saveNewEmployee(e1);
+
+
+
+        Sector s = sectorRepo.findById(2);
+        Employee e2 = new Employee(new NameInfo("Amare", "Stoudemire"),
+                new Salary(Currency.MKD, 16000, 500),
+                new Contract(LocalDate.of(2020,1,1), LocalDate.of(2021,3,1),25),
+                "123456111",
+                Position.SENIOR,
+                s);
+
+        employeeRepo.saveNewEmployee(e2);
     }
 }

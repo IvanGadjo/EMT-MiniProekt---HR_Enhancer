@@ -11,6 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
+
+// Biznis pravilata (1 request per employee, 15% max zgolemuvanje plata) se implementirani vo
+// employee-sector modulot, bidejki na toj modul se primenuvaat promenite koi proizleguvaat od requests-ot
+// od ovoj modul
+
+
 @Service
 @Transactional
 public class UsersService {

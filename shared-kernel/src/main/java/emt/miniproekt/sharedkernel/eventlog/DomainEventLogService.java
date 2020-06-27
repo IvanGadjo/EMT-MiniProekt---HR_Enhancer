@@ -22,9 +22,6 @@ public class DomainEventLogService {
         this.objectMapper = objectMapper;
     }
 
-//    public DomainEventLogService() {
-//
-//    }
 
     @Transactional(propagation = Propagation.MANDATORY)
     public void append(DomainEvent domainEvent){
@@ -32,12 +29,15 @@ public class DomainEventLogService {
         storedDomainEventRepo.saveAndFlush(storedDomainEvent);
     }
 
-    // TODO:
-//    @NonNull
-//    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-//    public List<StoredDomainEvent> retrieveLog(long lastProcessedEventId) {
-//
-//    }
+    // propagation = Propagation.REQUIRED ==>>  Support a current transaction, create a new one if none exists.
+    @NonNull
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public List<StoredDomainEvent> retrieveLog(int lastReadEventId) {
+        Integer lastDomainEventId = storedDomainEventRepo.findLastDomainEventId();  // mora Integer, ne int => za da moze da e null ako ne postoi vo DB
+        if (lastDomainEventId == null)
+            lastDomainEventId = 0;
+        return storedDomainEventRepo.findEventsBetween(lastDomainEventId, lastReadEventId);
+    }
 
 
 }
