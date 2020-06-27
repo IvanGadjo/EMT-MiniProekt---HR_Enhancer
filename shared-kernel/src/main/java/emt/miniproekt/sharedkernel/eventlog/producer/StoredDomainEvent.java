@@ -1,4 +1,4 @@
-package emt.miniproekt.sharedkernel.eventlog;
+package emt.miniproekt.sharedkernel.eventlog.producer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;

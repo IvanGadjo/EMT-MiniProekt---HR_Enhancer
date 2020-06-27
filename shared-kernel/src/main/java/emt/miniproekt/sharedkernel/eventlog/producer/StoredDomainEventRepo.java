@@ -1,4 +1,4 @@
-package emt.miniproekt.sharedkernel.eventlog;
+package emt.miniproekt.sharedkernel.eventlog.producer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +12,7 @@ public interface StoredDomainEventRepo extends JpaRepository<StoredDomainEvent, 
     int findLastDomainEventId();
 
     @Query(value = "select * from domain_events" +
-            "where id<= :newestId and id> :lastReadId ", nativeQuery = true)
+            " where id<= :newestId and id> :lastReadId ", nativeQuery = true)
     List<StoredDomainEvent> findEventsBetween(@Param("newestId") int newestId,
                                               @Param("lastReadId") int lastReadId);
 }

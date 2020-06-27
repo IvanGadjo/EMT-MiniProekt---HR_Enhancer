@@ -1,4 +1,4 @@
-package emt.miniproekt.sharedkernel.eventlog;
+package emt.miniproekt.sharedkernel.eventlog.producer;
 
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
 import org.springframework.stereotype.Service;

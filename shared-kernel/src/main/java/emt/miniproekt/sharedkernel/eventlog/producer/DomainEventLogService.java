@@ -1,10 +1,8 @@
-package emt.miniproekt.sharedkernel.eventlog;
+package emt.miniproekt.sharedkernel.eventlog.producer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
