@@ -1,6 +1,7 @@
 package emt.miniproekt.sharedkernel.port.client;
 
 import emt.miniproekt.sharedkernel.eventlog.consumer.RemoteEventLog;
+import emt.miniproekt.sharedkernel.eventlog.consumer.RemoteEventLogImpl;
 import emt.miniproekt.sharedkernel.eventlog.consumer.RemoteEventLogService;
 import emt.miniproekt.sharedkernel.eventlog.producer.StoredDomainEvent;
 import org.springframework.core.ParameterizedTypeReference;
@@ -62,7 +63,7 @@ public class RemoteEventLogServiceClient implements RemoteEventLogService {
             throw new IllegalArgumentException("Failed at getting eventLog from api");
         }
 
-        //return new RemoteEventLogImpl(resp);
-        return null;
+        return new RemoteEventLogImpl(resp);
+        //return null;
     }
 }
