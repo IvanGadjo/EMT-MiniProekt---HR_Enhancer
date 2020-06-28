@@ -70,4 +70,10 @@ public class User {
         complaintRequests.add(cr7);
     }
 
+    public void addPositionChangeRequest(PositionChangeRequest pcr) {positionChangeRequests.add(pcr);}
+
+    public void addRaiseRequest(RaiseRequest rr) {raiseRequests.add(rr);}
+
+    public void addRestDaysRequest(RestDaysRequest rdr) {restDaysRequests.add(rdr);}
+
 }

@@ -25,7 +25,7 @@ public class RestDaysRequestRepo {
         return restDaysRequestRepoJPA.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public RestDaysRequest addNewRestDaysRequest(RestDaysRequest restDaysRequest) {
+    public RestDaysRequest saveNewRestDaysRequest(RestDaysRequest restDaysRequest) {
         return restDaysRequestRepoJPA.save(restDaysRequest);
     }
 

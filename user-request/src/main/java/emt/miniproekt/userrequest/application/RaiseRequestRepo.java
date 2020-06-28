@@ -25,12 +25,13 @@ public class RaiseRequestRepo {
         return raiseRequestRepoJPA.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public RaiseRequest addNewRaiseRequest(RaiseRequest raiseRequest) {
+    public RaiseRequest saveNewRaiseRequest(RaiseRequest raiseRequest) {
         return raiseRequestRepoJPA.save(raiseRequest);
     }
 
     public void deleteById(int id) {
         raiseRequestRepoJPA.deleteById(id);
     }
+
 
 }
