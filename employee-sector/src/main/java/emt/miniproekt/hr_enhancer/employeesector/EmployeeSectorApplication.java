@@ -17,8 +17,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Import(SharedConfiguration.class)
 public class EmployeeSectorApplication {
 
-    @Autowired
-    RemoteEventLogService remoteEventLogService;
+//    @Autowired
+//    RemoteEventLogService remoteEventLogService;
 
     public static void main(String[] args) {
         SpringApplication.run(EmployeeSectorApplication.class, args);

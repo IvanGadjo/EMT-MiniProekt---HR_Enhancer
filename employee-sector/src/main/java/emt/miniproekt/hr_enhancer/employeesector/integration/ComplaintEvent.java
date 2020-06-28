@@ -4,7 +4,7 @@ import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
 
 import java.time.Instant;
 
-public class PositionChangeEvent implements DomainEvent {
+public class ComplaintEvent implements DomainEvent {
     @Override
     public Instant occurredOn() {
         return null;
