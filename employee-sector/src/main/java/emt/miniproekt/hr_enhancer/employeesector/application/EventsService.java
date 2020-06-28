@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class EventsService {
 
+    private final EmployeeRepo employeeRepo;
+
+
+    public EventsService(EmployeeRepo employeeRepo) {
+        this.employeeRepo = employeeRepo;
+    }
 
 
 }
