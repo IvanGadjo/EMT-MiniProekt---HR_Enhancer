@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class RemoteEventLogServiceClient implements RemoteEventLogService {
 
     private String source;

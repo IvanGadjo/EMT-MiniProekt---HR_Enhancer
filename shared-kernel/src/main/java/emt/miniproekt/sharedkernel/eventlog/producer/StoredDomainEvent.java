@@ -83,12 +83,28 @@ public class StoredDomainEvent {
         }
     }
 
+    @NonNull
+    public String getDomainEventClassName(){
+        return domainEventClassName;
+    }
+
+
+    @NonNull
+    public <T extends DomainEvent> T toDomainEvent(@NonNull ObjectMapper objectMapper,
+                                                   @NonNull Class<T> domainEventClass) {
+        Objects.requireNonNull(objectMapper, "objectMapper must not be null");
+        Objects.requireNonNull(domainEventClass, "domainEventClass must not be null");
+        try {
+            return objectMapper.readValue(domainEventBody, domainEventClass);
+        } catch (IOException ex) {
+            throw new IllegalStateException("Could not deserialize domain event from JSON", ex);
+        }
+    }
+
     // FIXME: Mozebi radi deserializerot ke treba da se implementira
-    // toDomainEvent()
     // toJsonString()
     // toJsonNode()
     // domainEventClass()
-    // domainEventClassName()
     // lookupDomainEventClass()
     // occurredOn()
     // toString()

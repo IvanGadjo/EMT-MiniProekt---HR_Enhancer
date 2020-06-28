@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
@@ -40,6 +42,15 @@ public class RemoteEventProcessor {
 
 
             // rabota so transaction template (line 55 funk)
+            storedDomainEvents.forEach(StDomEvent ->{
+                transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+                    @Override
+                    protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                        publishEvent(StDomEvent);
+                        setLastProcessedId(remEvlogServ, StDomEvent.getId());
+                    }
+                });
+            });
         });
     }
 
@@ -49,5 +60,18 @@ public class RemoteEventProcessor {
         if(id == null)
             return 0;
         return id;
+    }
+
+    public void setLastProcessedId(@NonNull RemoteEventLogService remoteEventLogService, int eventId){
+        ProcessedRemoteEvent processedRemoteEvent = new ProcessedRemoteEvent(remoteEventLogService.getSource(), eventId);
+        processedRemoteEventRepoJPA.saveAndFlush(processedRemoteEvent);
+    }
+
+    public void publishEvent(@NonNull StoredDomainEvent storedDomainEvent){
+        remoteEventTranslators.values().stream()
+                .filter(translator -> translator.supports(storedDomainEvent))
+                .findFirst()
+                .flatMap(translator -> translator.translate(storedDomainEvent))
+                .ifPresent(applicationEventPublisher::publishEvent);
     }
 }
