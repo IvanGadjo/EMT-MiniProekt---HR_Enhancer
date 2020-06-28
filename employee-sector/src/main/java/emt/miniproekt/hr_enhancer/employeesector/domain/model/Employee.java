@@ -57,11 +57,11 @@ public class Employee {
     @ManyToOne(fetch = FetchType.EAGER)
     private Sector sectorId;
 
-// todo: Ke treba da gi dodades i ovie za vo DB
-    // private int complaintReqId;
-//    private int raiseReqId;
-//    private int positionChangeReqId;
-//    private int restDaysReqId;
+
+     private Integer complaintReqId;
+     private Integer raiseReqId;
+     private Integer positionChangeReqId;
+     private Integer restDaysReqId;
 
 
     @SuppressWarnings("unused")
@@ -98,6 +98,22 @@ public class Employee {
 
     public void setSectorId(Sector sectorId) {
         this.sectorId = sectorId;
+    }
+
+    public void setComplaintReqId(int complaintReqId) {
+        this.complaintReqId = complaintReqId;
+    }
+
+    public void setRaiseReqId(int raiseReqId) {
+        this.raiseReqId = raiseReqId;
+    }
+
+    public void setPositionChangeReqId(int positionChangeReqId) {
+        this.positionChangeReqId = positionChangeReqId;
+    }
+
+    public void setRestDaysReqId(int restDaysReqId) {
+        this.restDaysReqId = restDaysReqId;
     }
 }
 
