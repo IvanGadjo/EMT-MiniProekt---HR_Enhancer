@@ -54,7 +54,7 @@ public class UsersService {
         userRepo.saveNewUser(theUser);
 
         // publish event
-        ComplaintRequestEvent event = new ComplaintRequestEvent(cr.getEmployeeId(), Instant.now(), cr.getDescription());
+        ComplaintRequestEvent event = new ComplaintRequestEvent(cr.getId(), cr.getEmployeeId(), Instant.now(), cr.getDescription());
         applicationEventPublisher.publishEvent(event);
 
         return cr;
@@ -69,7 +69,7 @@ public class UsersService {
         theUser.addPositionChangeRequest(pcr);
         userRepo.saveNewUser(theUser);
 
-        PositionChangeRequestEvent event = new PositionChangeRequestEvent(pcr.getEmployeeId(), Instant.now(), pcr.getDescription(), pcr.getNewPosition());
+        PositionChangeRequestEvent event = new PositionChangeRequestEvent(pcr.getId() ,pcr.getEmployeeId(), Instant.now(), pcr.getDescription(), pcr.getNewPosition());
         applicationEventPublisher.publishEvent(event);
 
         return pcr;
@@ -84,7 +84,7 @@ public class UsersService {
         theUser.addRaiseRequest(rr);
         userRepo.saveNewUser(theUser);
 
-        RaiseRequestEvent event = new RaiseRequestEvent(rr.getEmployeeId(), Instant.now(), rr.getDescription(), rr.getNewSalary());
+        RaiseRequestEvent event = new RaiseRequestEvent(rr.getId(), rr.getEmployeeId(), Instant.now(), rr.getDescription(), rr.getNewSalary());
         applicationEventPublisher.publishEvent(event);
 
         return rr;
@@ -99,7 +99,7 @@ public class UsersService {
         theUser.addRestDaysRequest(rdr);
         userRepo.saveNewUser(theUser);
 
-        RestDaysRequestEvent event = new RestDaysRequestEvent(rdr.getEmployeeId(), Instant.now(), rdr.getDescription(), rdr.getNumDays());
+        RestDaysRequestEvent event = new RestDaysRequestEvent(rdr.getId(), rdr.getEmployeeId(), Instant.now(), rdr.getDescription(), rdr.getNumDays());
         applicationEventPublisher.publishEvent(event);
 
         return rdr;
