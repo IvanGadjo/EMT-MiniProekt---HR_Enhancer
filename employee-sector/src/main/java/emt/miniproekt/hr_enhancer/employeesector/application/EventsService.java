@@ -89,13 +89,8 @@ public class EventsService {
     }
 
     public boolean CheckNumberOfRequests(Employee emp) {
-        if(emp.getPositionChangeReqId() == null && emp.getComplaintReqId() == null &&
-                emp.getRaiseReqId() == null && emp.getRestDaysReqId() == null ) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return emp.getPositionChangeReqId() == null && emp.getComplaintReqId() == null &&
+                emp.getRaiseReqId() == null && emp.getRestDaysReqId() == null;
     }
 
 }
