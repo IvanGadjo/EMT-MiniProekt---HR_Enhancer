@@ -3,10 +3,16 @@ package emt.miniproekt.userrequest.domain.event;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
+import lombok.Getter;
 
 import java.time.Instant;
 
+@Getter
+
 public class ComplaintRequestEvent implements DomainEvent {
+
+    @JsonProperty("complaintId")
+    private final int complaintId;
 
     @JsonProperty("employeeID")
     private final int employeeId;
@@ -20,17 +26,16 @@ public class ComplaintRequestEvent implements DomainEvent {
 
 
     @JsonCreator
-    public ComplaintRequestEvent(@JsonProperty("employeeId") int employeeId,
+    public ComplaintRequestEvent(@JsonProperty("complaintId") int complaintId,
+                                 @JsonProperty("employeeId") int employeeId,
                                  @JsonProperty("occurredOn") Instant occurredOn,
                                  @JsonProperty("description") String description){
+        this.complaintId = complaintId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;
         this.description = description;
     }
 
-    public int employeeId() {
-        return employeeId;
-    }
 
     public Instant occurredOn() {
         return occurredOn;
