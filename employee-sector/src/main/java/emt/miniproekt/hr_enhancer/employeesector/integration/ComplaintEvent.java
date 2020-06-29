@@ -9,13 +9,16 @@ import java.time.Instant;
 
 public class ComplaintEvent implements DomainEvent {
 
+    private final int complaintId;
+
     private final int employeeId;
 
     private final Instant occurredOn;
 
     private final String description;
 
-    public ComplaintEvent(int employeeId, Instant occurredOn, String description) {
+    public ComplaintEvent(int complaintId, int employeeId, Instant occurredOn, String description) {
+        this.complaintId = complaintId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;
         this.description = description;

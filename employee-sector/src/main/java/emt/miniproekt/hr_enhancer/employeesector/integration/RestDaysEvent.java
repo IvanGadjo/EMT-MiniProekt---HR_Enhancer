@@ -9,6 +9,8 @@ import java.time.Instant;
 
 public class RestDaysEvent implements DomainEvent {
 
+    private final int restDaysId;
+
     private final int employeeId;
 
     private final Instant occurredOn;
@@ -17,7 +19,8 @@ public class RestDaysEvent implements DomainEvent {
 
     private final String numDays;
 
-    public RestDaysEvent(int employeeId, Instant occurredOn, String description, String numDays) {
+    public RestDaysEvent(int restDaysId, int employeeId, Instant occurredOn, String description, String numDays) {
+        this.restDaysId = restDaysId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;
         this.description = description;

@@ -9,6 +9,8 @@ import java.time.Instant;
 
 public class PositionChangeEvent implements DomainEvent {
 
+    private final int positionChangeId;
+
     private final int employeeId;
 
     private final String description;
@@ -17,7 +19,8 @@ public class PositionChangeEvent implements DomainEvent {
 
     private final String newPosition;
 
-    public PositionChangeEvent(int employeeId, Instant occurredOn, String description, String newPosition) {
+    public PositionChangeEvent(int positionChangeId, int employeeId, Instant occurredOn, String description, String newPosition) {
+        this.positionChangeId = positionChangeId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;
         this.description = description;

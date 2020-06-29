@@ -9,6 +9,8 @@ import java.time.Instant;
 
 public class RaiseEvent implements DomainEvent {
 
+    private final int raiseId;
+
     private final int employeeId;
 
     private final Instant occurredOn;
@@ -17,7 +19,8 @@ public class RaiseEvent implements DomainEvent {
 
     private final double newSalary;
 
-    public RaiseEvent(int employeeId, Instant occurredOn, String description, double newSalary) {
+    public RaiseEvent(int raiseId, int employeeId, Instant occurredOn, String description, double newSalary) {
+        this.raiseId = raiseId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;
         this.description = description;
