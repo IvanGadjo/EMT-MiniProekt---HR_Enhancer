@@ -43,7 +43,8 @@ public class Employee {
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "start", column = @Column(name = "contract_start")),
-            @AttributeOverride(name = "end", column = @Column(name = "contract_end"))
+            @AttributeOverride(name = "end", column = @Column(name = "contract_end")),
+            @AttributeOverride(name = "restDays", column = @Column(name = "restDays"))
     })
     private Contract contract;
 

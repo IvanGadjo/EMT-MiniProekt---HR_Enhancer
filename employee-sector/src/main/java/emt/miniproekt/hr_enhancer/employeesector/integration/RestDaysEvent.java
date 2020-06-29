@@ -17,9 +17,9 @@ public class RestDaysEvent implements DomainEvent {
 
     private final String description;
 
-    private final String numDays;
+    private final int numDays;
 
-    public RestDaysEvent(int restDaysId, int employeeId, Instant occurredOn, String description, String numDays) {
+    public RestDaysEvent(int restDaysId, int employeeId, Instant occurredOn, String description, int numDays) {
         this.restDaysId = restDaysId;
         this.employeeId = employeeId;
         this.occurredOn = occurredOn;

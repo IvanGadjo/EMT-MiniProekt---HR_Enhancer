@@ -7,6 +7,7 @@ import emt.miniproekt.hr_enhancer.employeesector.integration.RaiseEvent;
 import emt.miniproekt.hr_enhancer.employeesector.integration.RestDaysEvent;
 import emt.miniproekt.sharedkernel.domain.base.Position;
 import emt.miniproekt.sharedkernel.domain.financial.Currency;
+import emt.miniproekt.sharedkernel.domain.val_objs.Contract;
 import emt.miniproekt.sharedkernel.domain.val_objs.Salary;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class EventsService {
         Employee emp = employeeRepo.findById(event.getEmployeeId());
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getComplaintId());
+            employeeRepo.saveNewEmployee(emp);
         }
         else {
             throw new IllegalArgumentException("This employee already has an active request");
@@ -57,6 +59,7 @@ public class EventsService {
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getPositionChangeId());
             emp.setPosition(Position.valueOf(event.getNewPosition()));
+            employeeRepo.saveNewEmployee(emp);
         }
         else {
             throw new IllegalArgumentException("This employee already has an active request");
@@ -68,8 +71,9 @@ public class EventsService {
         Employee emp = employeeRepo.findById(event.getEmployeeId());
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getRaiseId());
-            Salary salary = new Salary(Currency.EUR, event.getNewSalary(), 0);
+            Salary salary = new Salary(emp.getSalary().getCurrency(), event.getNewSalary(), emp.getSalary().getBonus());
             emp.setSalary(salary);
+            employeeRepo.saveNewEmployee(emp);
         }
         else {
             throw new IllegalArgumentException("This employee already has an active request");
@@ -81,7 +85,8 @@ public class EventsService {
         Employee emp = employeeRepo.findById(event.getEmployeeId());
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getRestDaysId());
-            // go nema vo atrributte overrides restDays za da mozam da go smenam vo contracts
+            Contract contract = new Contract(emp.getContract().getStart(), emp.getContract().getEnd(), event.getNumDays());
+            employeeRepo.saveNewEmployee(emp);
         }
         else {
             throw new IllegalArgumentException("This employee already has an active request");
