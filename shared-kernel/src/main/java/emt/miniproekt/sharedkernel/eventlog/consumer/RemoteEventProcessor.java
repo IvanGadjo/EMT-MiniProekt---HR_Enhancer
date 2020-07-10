@@ -34,12 +34,18 @@ public class RemoteEventProcessor {
         this.transactionTemplate = transactionTemplate;
     }
 
-    // @Scheduled(fixedDelay = 20000)
+    @Scheduled(fixedDelay = 20000)
     public void processEvents() {
         remoteEventLogServices.values().forEach(remEvlogServ -> {
             RemoteEventLog remoteEventLog = remEvlogServ.getCurrentLog(getLastProcessedId(remEvlogServ));
+
+
             List<StoredDomainEvent> storedDomainEvents = remoteEventLog.events();
 
+
+            for(StoredDomainEvent s: storedDomainEvents){
+                System.out.println(s);
+            }
 
             // rabota so transaction template (line 55 funk)
             storedDomainEvents.forEach(StDomEvent ->{
@@ -55,11 +61,15 @@ public class RemoteEventProcessor {
     }
 
     public int getLastProcessedId(@NonNull RemoteEventLogService remoteEventLogService){
-        Integer id = processedRemoteEventRepoJPA.findProcessedRemoteEventWithSource(remoteEventLogService.getSource()).getId();
+        //  Integer id = processedRemoteEventRepoJPA.findProcessedRemoteEventWithSource(remoteEventLogService.getSource()).getId();
+        Integer id = processedRemoteEventRepoJPA.findById(remoteEventLogService.getSource())
+                .map(ProcessedRemoteEvent::getLastProcessedEventId)
+                .orElse(0);
 
-        if(id == null)
-            return 0;
         return id;
+//        if(id == null)
+//            return 0;
+//        return id;
     }
 
     public void setLastProcessedId(@NonNull RemoteEventLogService remoteEventLogService, int eventId){

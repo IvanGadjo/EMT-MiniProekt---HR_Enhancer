@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import emt.miniproekt.sharedkernel.domain.base.DomainEvent;
 import emt.miniproekt.sharedkernel.eventlog.consumer.RemoteEventTranslator;
 import emt.miniproekt.sharedkernel.eventlog.producer.StoredDomainEvent;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class PositionChangeEventTranslator implements RemoteEventTranslator {
 
     private final ObjectMapper objectMapper;

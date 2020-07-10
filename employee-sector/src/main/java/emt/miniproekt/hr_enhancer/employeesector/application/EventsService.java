@@ -43,6 +43,9 @@ public class EventsService {
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onComplaintEvent(ComplaintEvent event) {
+
+        // pagja, employeeId i requestId se sekogas 0, greska pri deserijalizacija
+
         Employee emp = employeeRepo.findById(event.getEmployeeId());
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getComplaintId());
@@ -82,6 +85,7 @@ public class EventsService {
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onRestDaysEvent(RestDaysEvent event) {
+
         Employee emp = employeeRepo.findById(event.getEmployeeId());
         if(CheckNumberOfRequests(emp)) {
             emp.setComplaintReqId(event.getRestDaysId());

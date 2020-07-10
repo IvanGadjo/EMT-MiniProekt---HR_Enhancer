@@ -34,4 +34,12 @@ public class ComplaintEvent implements DomainEvent {
     public String getDescription() {
         return description;
     }
+
+    public int getComplaintId(){
+        return complaintId;
+    }
+
+    public int getEmployeeId(){
+        return employeeId;
+    }
 }

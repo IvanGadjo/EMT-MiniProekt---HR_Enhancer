@@ -14,7 +14,7 @@ public class ComplaintRequestEvent implements DomainEvent {
     @JsonProperty("complaintId")
     private final int complaintId;
 
-    @JsonProperty("employeeID")
+    @JsonProperty("employeeId")
     private final int employeeId;
 
     @JsonProperty("occurredOn")

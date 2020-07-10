@@ -10,9 +10,10 @@ import javax.persistence.*;
 @Getter
 public class ProcessedRemoteEvent {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
 
+    @Id
     @Column(name = "source")    // source App from which the event occurred
     private String source;
 
